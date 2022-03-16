@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Container } from 'react-bootstrap';
 import {Hasil, ListCategories, Menus, NavbarComponent} from './components/';
 import axios from 'axios'
-const API_URL = 'http://localhost:3000/';
+const API_URL = 'http://localhost:5000/';
 
 export default class App extends Component {
   constructor(props) {
