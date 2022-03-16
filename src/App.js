@@ -10,7 +10,9 @@ export default class App extends Component {
   
     this.state = {
        menus: [],
+       categoriYangdipilih : 'Makanan'
     }
+
   }
 
   componentDidMount() {
@@ -23,18 +25,34 @@ export default class App extends Component {
       .catch(error =>{
        console.log(error);
       })
+    }
+
+  changeCategory = (value) => {
+    this.state({
+      categoriyangdipilih : value,
+      menus: []
+    })
+    axios
+      .get(API_URL+"products?category.nama="+value)
+      .then(res => {
+        const menus = res.data;
+        this.setState({ menus });
+      })
+      .catch(error =>{
+       console.log(error);
+      })
   }
 
   render() {
-    const { menus } = this.state
-   console.log(this.state.menus);
+    const { menus, categoriyangdipilih } = this.state;
+    console.log(this.state.menus);
     return (
       <div className="App">
     <NavbarComponent />
     <div className="nt-3">
       <Container fluid>
         <Row>
-          <ListCategories />
+          <ListCategories changecategory={this.changecategory} categoriyangdipilih={categoriyangdipilih} />
           <Col>
             <h4><strong>Daftar Produk</strong></h4>
             <hr />
